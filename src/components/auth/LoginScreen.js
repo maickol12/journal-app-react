@@ -12,7 +12,6 @@ const renderField = ({ input, label, type, meta: { touched, error, warning } }) 
                 {...input} 
                 type={type}
                 placeholder={label}
-                name='email' 
                 className='auth__input' 
                 autoComplete='off'/>
         </div>
@@ -20,9 +19,8 @@ const renderField = ({ input, label, type, meta: { touched, error, warning } }) 
 }
 
 const LoginScreen = (props) => {
-    const { authReducer,form,authLogin,loginEmailPassword,googleLogin } = props;
-    const handleLogin = (e) => {
-        e.preventDefault();
+    const { authReducer,form,authLogin,loginEmailPassword,googleLogin,handleSubmit } = props;
+    const handleLogin = () => {
         const { login: { values } } = form;
         console.log(values);
         //authLogin(values);
@@ -32,7 +30,7 @@ const LoginScreen = (props) => {
     return (
         <div>
             <h3 className='auth__tittle'>Login</h3>
-            <form onSubmit={ handleLogin }>
+            <form onSubmit={ handleSubmit(handleLogin) }>
                 <Field 
                     type='text'
                     label='email'
